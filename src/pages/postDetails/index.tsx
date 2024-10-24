@@ -1,8 +1,8 @@
-import { useLocation, useParams } from 'react-router-dom';
-import './styles.scss';
 import { useEffect } from 'react';
-import store from '@src/store/usePostsStore';
+import { useLocation, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import store from '@src/store/usePostsStore';
+import './styles.scss';
 
 function Post() {
   const { id } = useParams();

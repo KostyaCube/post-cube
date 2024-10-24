@@ -64,8 +64,8 @@ class PostsStore {
     }
 
     async addPost(title: string, body: string) {
-
         const formData = new FormData();
+
         formData.append('title', title);
         formData.append('body', body);
         formData.append('userId', '1');
@@ -84,7 +84,7 @@ class PostsStore {
         } catch (err) {
             runInAction(() => {
                 this.error = err instanceof Error ? err.message : `Error: ${err}`;
-                this.loading = false;
+
             });
         }
     }

@@ -25,13 +25,7 @@ h3::first-letter {
   text-transform: uppercase;
 }
 
-/* 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} 
-} */
+.center {
+  margin-top: 20%;
+  text-align: center;
+}

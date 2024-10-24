@@ -13,10 +13,10 @@ function App() {
       <Route
         path="/*"
         element={
-          <>
+          <div className='center'>
             <h2>Page not found</h2>
             <button onClick={() => navigate('/main')}>Back Home</button>
-          </>
+          </div>
         }
       />
     </Routes>
