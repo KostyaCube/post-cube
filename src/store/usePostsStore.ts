@@ -62,6 +62,32 @@ class PostsStore {
             });
         }
     }
+
+    async addPost(title: string, body: string) {
+
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('body', body);
+        formData.append('userId', '1');
+
+        try {
+            const response = await axios.post<IPost>(
+                'https://jsonplaceholder.typicode.com/posts',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    },
+                }
+            );
+            console.log('Response:', response.data);
+        } catch (err) {
+            runInAction(() => {
+                this.error = err instanceof Error ? err.message : `Error: ${err}`;
+                this.loading = false;
+            });
+        }
+    }
 }
 
 const store = new PostsStore();

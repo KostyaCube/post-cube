@@ -1,12 +1,19 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import store from '@src/store/usePostsStore';
 import Card from '../postCard';
 import './styles.scss';
 import { IPost } from '@src/types';
-import { ArrowRightOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import Pagination from '@src/components/pagination';
+import Modal from '@src/components/modal/modal';
+import CreatePostForm from '@src/components/createPostForm';
 
 function MainPage(): JSX.Element {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
   useEffect(() => {
     store.fetchPosts(store.currentPage);
     store.fetchUsers();
@@ -16,29 +23,20 @@ function MainPage(): JSX.Element {
 
   return (
     <div className="container">
-      <div className="pagination">
-        <button onClick={() => store.fetchPosts(store.currentPage - 1)} disabled={store.currentPage === 1}>
-          <ArrowLeftOutlined />
-          &nbsp; Back
-        </button>
-        <button onClick={() => store.fetchPosts(store.currentPage + 1)}>
-          Next&nbsp; <ArrowRightOutlined />
-        </button>
-      </div>
+      <Pagination />
+      <button className="create-button" onClick={openModal}>
+        create post
+      </button>
 
       {store.posts.map((post: IPost) => (
         <Card key={post.id} post={{ ...post, author: store.users.find((user) => user.id === post.userId)?.name || 'Unknown author' }} />
       ))}
 
-      <div className="pagination">
-        <button onClick={() => store.fetchPosts(store.currentPage - 1)} disabled={store.currentPage === 1}>
-          <ArrowLeftOutlined />
-          &nbsp; Back
-        </button>
-        <button onClick={() => store.fetchPosts(store.currentPage + 1)}>
-          Next&nbsp; <ArrowRightOutlined />
-        </button>
-      </div>
+      <Pagination />
+
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <CreatePostForm closeModal={closeModal} />
+      </Modal>
     </div>
   );
 }

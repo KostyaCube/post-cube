@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IPost {
     userId: number,
     id: number,
@@ -39,4 +41,10 @@ export interface IUser {
     phone: string;
     website: string;
     company: Company;
+}
+
+export interface ModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    children: ReactNode;
 }
