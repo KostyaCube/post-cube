@@ -1,8 +1,11 @@
 import { IProps } from '@src/types';
 import './styles.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRightOutlined } from '@ant-design/icons';
 
 function Card({ post }: IProps) {
+  const navigate = useNavigate();
+
   return (
     <div className="card list">
       <img src="https://picsum.photos/1500/1500.jpg" alt="post-image" />
@@ -14,7 +17,10 @@ function Card({ post }: IProps) {
           {post.body}
         </p>
         <div className="link-wrapper">
-          <Link to={`/posts/${post.id}`}>read more</Link>
+          <p>Author: {post.author}</p>
+          <button onClick={() => navigate(`/posts/${post.id}`, { state: { userId: post.userId } })}>
+            read more <ArrowRightOutlined />
+          </button>
         </div>
       </div>
     </div>

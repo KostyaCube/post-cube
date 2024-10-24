@@ -3,9 +3,16 @@ h3 {
   line-height: 22px;
 }
 
-a {
+button {
   text-transform: uppercase;
   text-decoration: none;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.6;
+  }
 }
 
 .short-desc {
@@ -54,9 +61,8 @@ a {
 
 .link-wrapper {
   display: flex;
-  justify-content: flex-end;
-  padding-right: 32px;
-  &:hover {
+  justify-content: space-between;
+  a:hover {
     opacity: 0.6;
   }
 }
